@@ -1,0 +1,29 @@
+==Module 2 == 
+git ignore -this file ignores what not to save in git 
+
+Git 
+-delete the .git hidden file in the dating-spa app
+-then cd .. to the DatingApp directory where there is 2 folders 
+-"git init" to initialize a new git repository 
+-add .gitignore to datingapp.api 
+-ignore these files 
+.vscode
+bin 
+obj
+*.db //* means to ignore all files relating to database
+
+#when creating repository on github you have to unable allow control origin plugin
+
+==Module 3 ====================
+
+step 1:"dotnet ef migrations add AddedUserEntity"
+meaning: After making changes to your EF Core model, the database schema might be out of sync. To bring it up to date, add another migration. The migration name can be used like a commit message in a version control system. For example, you might choose a name like AddedUserEntitys if the change is a new entity class for users
+
+step 2: "dotnet ef database update"
+meaning: after you have added a new migration, use this to update the new migration to the real database
+
+#IAuthRepository => in c# we always start the interface file name with an I 
+
+#AuthRepository : IRepository => control . and say implement this interface to bring the taskss in
+
+

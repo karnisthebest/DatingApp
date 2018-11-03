@@ -10,5 +10,7 @@ namespace DatingApp.API.Data
    
         //create a table called Values when migrate entity framework 
         public DbSet<Value> Values { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }
