@@ -42,6 +42,8 @@ namespace DatingApp.API
             //allow dependency injection for repository 
             services.AddScoped<IAuthRepository, AuthRepository>();
             // authorization 
+            // authentication middleware 
+            // protect controllers and actions inside controller 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
