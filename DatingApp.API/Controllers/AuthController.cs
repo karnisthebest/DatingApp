@@ -64,6 +64,8 @@ namespace DatingApp.API.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
+          
+            
             //send to check if user exist in Authrepository 
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
             //if user doesn't exist 
@@ -105,10 +107,6 @@ namespace DatingApp.API.Controllers
                 //write token into our reponse that we are sending back to our client 
                 token = tokenHandler.WriteToken(token)
             });
-
-
         }
-
-
     }
 }

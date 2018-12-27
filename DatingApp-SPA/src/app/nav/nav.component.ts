@@ -22,12 +22,12 @@ export class NavComponent implements OnInit {
     this.authService.login(this.model).subscribe(next => {
       console.log('logged in successfully');
     }, error => {
-      console.log('Failed to login');
+      console.log(error);
     });
   }
 
-  // check if there's still token so we no we are still logged in
-  loggedIn(){
+  // check if there's still token so we know we are still logged in
+  loggedIn() {
     // get jwt token from the local storage and store in token var
     const token = localStorage.getItem('token');
     // !! =>
@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
   }
 
   // remove jwt token when logged out
-  loggedOut(){
+  loggedOut() {
     localStorage.removeItem('token');
     console.log('logged out');
   }

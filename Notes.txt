@@ -26,4 +26,11 @@ meaning: after you have added a new migration, use this to update the new migrat
 
 #AuthRepository : IRepository => control . and say implement this interface to bring the taskss in
 
+#template reference varible => #loginForm="ngForm" //use the # sign 
+template reference varible is used to check the states 
+Ex. valid,touched,dirty,value 
+<pre>
+Form Valid: {{loginForm.valid}}
+</pre>
+
 
