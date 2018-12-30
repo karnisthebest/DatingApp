@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 // normally a component will automatically be injected
 // but a service will not, so we need to inject it
 @Injectable({
@@ -9,6 +9,10 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   baseUrl = 'http://localhost:5000/api/auth/';
+  jwtHelper = new JwtHelperService();
+  decodedToken: any;
+
+
   constructor(private http: HttpClient) {}
 
   login(model: any) {
@@ -28,6 +32,10 @@ export class AuthService {
             if (user) {
               // store the jwt token locally
               localStorage.setItem('token', user.token);
+              // store decoded token so we could get the info ex. username to show in the nav bar
+              this.decodedToken = this.jwtHelper.decodeToken(user.token);
+              console.log(this.decodedToken);
+
             }
           })
         )
@@ -36,5 +44,11 @@ export class AuthService {
 
   register(model: any) {
     return this.http.post(this.baseUrl + 'register', model);
+  }
+
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    // if it is not expired then return true vice versa
+    return !this.jwtHelper.isTokenExpired(token);
   }
 }

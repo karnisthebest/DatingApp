@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_servicese/auth.service';
+import { AlertifyService } from '../_servicese/alertify.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,7 @@ export class NavComponent implements OnInit {
 
   // store username and password that will then send to check in the server
   model: any = {};
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -20,26 +21,22 @@ export class NavComponent implements OnInit {
     // then it will return as an observable so we have to subscribe
     // next console log
     this.authService.login(this.model).subscribe(next => {
-      console.log('logged in successfully');
+      this.alertify.success('logged in successfully');
     }, error => {
-      console.log(error);
+      this.alertify.error(error);
     });
   }
 
   // check if there's still token so we know we are still logged in
   loggedIn() {
-    // get jwt token from the local storage and store in token var
-    const token = localStorage.getItem('token');
-    // !! =>
-    // return true if there is a token
-    // return false if there isn't a token
-    return !!token;
+    // this will return true if the token is not expired
+    return this.authService.loggedIn();
   }
 
   // remove jwt token when logged out
   loggedOut() {
     localStorage.removeItem('token');
-    console.log('logged out');
+    this.alertify.message('logged out');
   }
 
 }

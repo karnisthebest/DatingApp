@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../_servicese/auth.service';
+import { AlertifyService } from '../_servicese/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -15,16 +16,16 @@ export class RegisterComponent implements OnInit {
 
 
   model: any = {};
-  constructor(private autService: AuthService) { }
+  constructor(private autService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
 
   register() {
     this.autService.register(this.model).subscribe(() => {
-    console.log('registration successful');
+    this.alertify.success('registration successful');
     }, error => {
-      console.log(error);
+      this.alertify.error(error);
     });
   }
 
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
     // inside emit() can be any data such as object etc. but here we are sending boolean
     // send data to parent component using emit
     this.cancelRegister.emit(false);
-    console.log('cancelled');
+
   }
 
 
